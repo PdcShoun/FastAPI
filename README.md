@@ -14,7 +14,7 @@ kubectl get pods -n python
 ```
 Don't forget to forward port
 ```
-kubectl port-forward <my-app-name> 8000:8000
+kubectl port-forward -n python <name-from-get-pods> 8000:8000
 ```
 Stop
 ```
