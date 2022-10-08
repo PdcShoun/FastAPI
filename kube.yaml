@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: monolithic
+  name: monolithic
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: monolithic
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: monolithic
+    spec:
+      containers:
+      - image: shounnnn/fastapi:1
+        name: monolithic
+        ports:
+        - containerPort: 8000
+        imagePullPolicy: Always
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "500m"
+          limits:
+            memory: "256Mi"
+            cpu: "750m"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-monolithic
+spec:
+  selector:
+    app: monolithic
+  type: NodePort 
+  sessionAffinity: None
+  ports:
+  - name: svc-monolithic
+    protocol: TCP
+    port: 8000
+    targetPort: 8000
+    nodePort: 30080
