@@ -18,7 +18,7 @@ app.add_middleware(
 
 @app.get('/')
 def home():
-    return {"message": "Hello WorldXX"}
+    return {"message": "Hello World"}
 
 
 @app.get('/get-all')
