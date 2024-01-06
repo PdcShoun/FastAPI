@@ -8,6 +8,7 @@ services:
     #   - ./app:/code/app
     networks:
       - network
+    restart: always
 
   watchtower:
     image: containrrr/watchtower
@@ -15,6 +16,8 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     networks:
       - network
+    restart: always
+    command: --interval 30 --cleanup
 
 networks:
   network:
