@@ -1,17 +1,19 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from .models import People
 from dotenv import dotenv_values
-from .db import conn
-from mongoengine import connect
-from pymongo import MongoClient
-import json
 
 config = dotenv_values(".env")
 
 app = FastAPI()
-connect(db='db', host='localhost', port=27017, username='admin', password='admin')
 
+origins = ['*']
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 @app.get('/')

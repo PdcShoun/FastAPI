@@ -1,36 +1,20 @@
 version: '3.8'
 services:
   fastapi:
-    # build:
-    #   context: .
-    #   dockerfile: Dockerfile
-    image: shounnnn/fastapi:1
+    image: shounnnn/fastapi:dev
     ports:
       - "8000:8000"
-    volumes:
-      - ./app:/code/app
+    # volumes:
+    #   - ./app:/code/app
     networks:
       - network
-    depends_on:
-      - mongodb
 
-  mongodb:
-    image: mongo
-    container_name: mongo
-    # restart: always
-    ports:
-      - "27017:27017"
+  watchtower:
+    image: containrrr/watchtower
     volumes:
-      - ./data:/data/db
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
-      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
-      MONGO_INITDB_DATABASE: ${MONGO_INITDB_DATABASE}
+      - /var/run/docker.sock:/var/run/docker.sock
     networks:
       - network
-    logging:
-      options:
-        max-size: 10m
 
 networks:
   network:
