@@ -1,0 +1,21 @@
+[project]
+name = "pdm-fastapi"
+version = "0.1.0"
+description = "Default template for PDM package"
+authors = [
+    {name = "PdcShoun", email = "pdc.pachara@gmail.com"},
+]
+dependencies = [
+    "fastapi>=0.110.1",
+]
+requires-python = ">=3.11"
+readme = "README.md"
+license = {text = "MIT"}
+
+[build-system]
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
+
+
+[tool.pdm]
+distribution = true
