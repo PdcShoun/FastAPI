@@ -19,3 +19,7 @@ class User(Base):
     password: Mapped[str] = mapped_column(
         nullable=False,
     )
+    email: Mapped[str] = mapped_column(
+        String(50),
+        unique=True,
+    )
