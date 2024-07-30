@@ -12,18 +12,10 @@ router = APIRouter(
 )
 
 
-def raise_test_exception():
-    raise HTTPException(status_code=404, detail="Item not found")
-
-def omg():
-    raise_test_exception()
-
 @router.post("/", status_code=status.HTTP_201_CREATED)
 def create_user(user_data: UserPost, db: Session = Depends(get_db)):
     user = User(password=user_data.password)
-    omg()
     db.add(user)
-    print(user)
     return {
         "message": "User created",
     }
