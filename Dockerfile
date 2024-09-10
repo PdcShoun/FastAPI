@@ -5,6 +5,7 @@ COPY --from=ghcr.io/astral-sh/uv:0.4.8 /uv /bin/uv
 WORKDIR /code
 
 COPY ./pyproject.toml .
+COPY ./uv.lock .
 
 RUN uv pip install -r pyproject.toml --system
 
