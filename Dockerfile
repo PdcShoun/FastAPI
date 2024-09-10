@@ -1,15 +1,12 @@
-FROM python:3.9.0-alpine
+FROM python:3.12.6-slim
+
+COPY --from=ghcr.io/astral-sh/uv:0.4.8 /uv /bin/uv
 
 WORKDIR /code
 
-COPY ./requirements.txt /code/requirements.txt
+COPY ./pyproject.toml .
 
-# If python require gcc
-# RUN apk add --no-cache --update python3-dev gcc build-base
-
-RUN python -m pip install --upgrade pip
-
-RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
+RUN uv pip install -r pyproject.toml
 
 COPY ./app /code/app
 
